@@ -7,6 +7,7 @@ using System.Web.Routing;
 using System.Web.Security;
 using System.Web.SessionState;
 using System.Web.Http;
+using FirstQuestion.Extensions;
 
 namespace FirstQuestion
 {
@@ -16,8 +17,14 @@ namespace FirstQuestion
         {
             // Code that runs on application startup
             AreaRegistration.RegisterAllAreas();
-            GlobalConfiguration.Configure(WebApiConfig.Register);
-            RouteConfig.RegisterRoutes(RouteTable.Routes);            
+            GlobalConfiguration.Configure(FirstQuestion.Api.WebApiConfig.Register);
+            RouteConfig.RegisterRoutes(RouteTable.Routes);
+
+            GlobalFilters.Filters.Add(new RedirectToCanonicalUrlAttribute(RouteTable.Routes.AppendTrailingSlash, RouteTable.Routes.LowercaseUrls));
+
+#if (!DEBUG)
+            GlobalFilters.Filters.Add(new RedirectToHttpsAttribute(true));
+#endif
         }
     }
 }

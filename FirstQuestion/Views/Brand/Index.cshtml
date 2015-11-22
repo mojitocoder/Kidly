@@ -1,0 +1,33 @@
+﻿
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Brand</title>
+    <script src="~/Scripts/angular.js" type="text/javascript"></script>
+    <script src="~/Scripts/Apps/Brand/index.js" type="text/javascript"></script>
+
+</head>
+<body ng-app="mainModule">
+    <h2>Brand: @ViewBag.BrandName</h2>
+    <div ng-controller="mainController">
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Country Of Origin</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="product in products">
+                    <td>{{product.Id}}</td>
+                    <td>{{product.Name}}</td>
+                    <td>{{product.CountryOfOrigin}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
